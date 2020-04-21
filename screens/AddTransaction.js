@@ -10,37 +10,37 @@ export default class AddTransaction extends React.Component {
     this.state = {
       transaction: '',
       category: '',
-      amount: '',
+      amount: 0,
+      data: [{
+        value: 'Transportation',
+      }, {
+        value: 'Food',
+      }, {
+        value: 'Utilities',
+      }],
     }
     this.addTrans = this.addTrans.bind(this)
   }
   addTrans() {
-    
+    this.props.navigation.goBack();
   }
 
   render() {
-    let data = [{
-      value: 'Banana',
-    }, {
-      value: 'Mango',
-    }, {
-      value: 'Pear',
-    }];
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.input}
           placeholder='Name of Transaction'
-          onChangeText={(val) => this.setState({transaction: val})} />
+          onChangeText={(val) => this.setState({ transaction: val })} />
         <TextInput
           style={styles.input}
           placeholder='Amount'
-          onChangeText={(val) => this.setState({amount: val})} />
+          onChange={(val) => this.setState({ amount: val })} />
         <Dropdown
           style={styles.menu}
           label='Category'
-          data={data}
-          onChangeText={(data) => this.setState({category: data})}
+          data={this.state.data}
+          onChangeText={(data) => this.setState({ category: data.value })}
         />
         <FlatButton text='Add Transaction' onPress={this.addTrans} />
       </View>
