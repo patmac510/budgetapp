@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Card from '../shared/card'
+import {MaterialIcons} from '@expo/vector-icons';
+
 
 export default class Transactions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      transactions: [{transaction_name:'bus', transaction_id: 1}, {transaction_name:'food', transaction_id: 2}],
+      transactions: [{transaction_name:'bus', transaction_id: 1, amount: 200}, {transaction_name:'food', transaction_id: 2, amount: 350}],
       category: [],
     }
   }
@@ -15,7 +18,13 @@ export default class Transactions extends React.Component {
         {this.state.transactions.map((transaction) => {
           return (
             <View key={transaction.transaction_id}>
+              <Card>
               <Text style={styles.transaction}>{transaction.transaction_name}</Text>
+              <Text style={styles.amount}>$ {transaction.amount}</Text>
+              <TouchableOpacity style={styles.icon}>
+              <MaterialIcons name='close' size={28} onPress={this.deleteTrans} />
+              </TouchableOpacity>
+              </Card>
               </View>
           )
         })}
@@ -30,14 +39,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 20,
   },
   transaction: {
-    marginTop: 10,
-    padding: 20,
-    width: 300,
-    backgroundColor: 'blue',
+    marginTop: 5,
+    padding: 10,
+    width: 325,
+    backgroundColor: '#fff',
     fontSize: 18,
-    textAlign: 'left'
+    textAlign: 'left',
+  },
+  icon: {
+    position: 'absolute',
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  amount: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 40,
+    marginTop: 5,
+    padding: 10,
+    fontSize: 18,
   }
 });

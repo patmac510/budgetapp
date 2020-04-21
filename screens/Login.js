@@ -10,7 +10,7 @@ export default function Login( {navigation} ) {
 
   return (
     <View style={styles.container}>
-      <Text>Login Screen</Text>
+      <Text style={styles.text}>Welcome</Text>
       <View style={styles.buttonContainer}>
         <FlatButton text='Next' onPress={pressHandler} />
       </View>
@@ -27,5 +27,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+  text: {
+    fontSize: 28,
+    fontWeight: 'bold',
   }
 });

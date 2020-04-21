@@ -18,7 +18,10 @@ export default function Home( {navigation} ) {
 
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <View>
+        <Text style={styles.budget}>Current Budget: $3000</Text>
+        <Text style={styles.spending}>Total Spending: $550</Text>
+      </View>
       <View style={styles.buttonContainer}>
         <FlatButton text='Add Transaction' onPress={addTrans} />
         <FlatButton text='Transactions' onPress={trans} />
@@ -37,5 +40,25 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+  budget: {
+    margin: 10,
+    padding: 20,
+    fontWeight: 'bold',
+    fontSize: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+  spending: {
+    margin: 10,
+    padding: 20,
+    fontWeight: 'bold',
+    fontSize: 20,
+    borderWidth: 2,
+    borderColor: 'black',
+    textAlign: 'center',
+    justifyContent: 'center',
   }
 });
