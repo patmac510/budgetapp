@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import FlatButton from '../shared/button';
 
 export default function Login( {navigation} ) {
   
@@ -11,7 +12,7 @@ export default function Login( {navigation} ) {
     <View style={styles.container}>
       <Text>Login Screen</Text>
       <View style={styles.buttonContainer}>
-        <Button title='Next' onPress={pressHandler} />
+        <FlatButton text='Next' onPress={pressHandler} />
       </View>
     </View>
   );

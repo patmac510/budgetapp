@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import FlatButton from '../shared/button';
+
 
 export default function Home( {navigation} ) {
 
@@ -18,9 +20,9 @@ export default function Home( {navigation} ) {
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <View style={styles.buttonContainer}>
-        <Button title='Add a Transaction' onPress={addTrans} />
-        <Button title='Transactions' onPress={trans} />
-        <Button title='View Previous Months' onPress={months} />
+        <FlatButton text='Add Transaction' onPress={addTrans} />
+        <FlatButton text='Transactions' onPress={trans} />
+        <FlatButton text='View Previous Months' onPress={months} />
       </View>
     </View>
   );

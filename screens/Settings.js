@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import FlatButton from '../shared/button';
+
 
 export default function Settings( {navigation} ) {
 
@@ -21,13 +23,12 @@ export default function Settings( {navigation} ) {
 
   return (
     <View style={styles.container}>
-      <Text>Settings</Text>
       <View style={styles.buttonContainer}>
-        <Button title='Change Budget Amount' onPress={budget} />
-        <Button title='Change Income Amount' onPress={income} />
-        <Button title='Change/Add Categories' onPress={categories} />
-        <Button title='Edit Spending Plan' onPress={spendingPlan} />
-        <Button title='View Summary' onPress={summary} />
+        <FlatButton text='Change Budget' onPress={budget} />
+        <FlatButton text='Change Income' onPress={income} />
+        <FlatButton text='Cahnge/Add Categories' onPress={categories} />
+        <FlatButton text='Spending Plan' onPress={spendingPlan} />
+        <FlatButton text='View Summary' onPress={summary} />
       </View>
     </View>
   );
