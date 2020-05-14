@@ -3,7 +3,7 @@ const pg = require('pg');
 const pool = new pg.Pool({
   user: 'patmac510',
   host: 'localhost',
-  database: 'budgetApp',
+  database: 'budgetapp',
 });
 
 pool.on('error', (err, client) => {

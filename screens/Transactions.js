@@ -2,16 +2,52 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Card from '../shared/card'
 import {MaterialIcons} from '@expo/vector-icons';
+const axios = require('axios');
 
 
 export default class Transactions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      transactions: [{transaction_name:'bus', transaction_id: 1, amount: 200}, {transaction_name:'food', transaction_id: 2, amount: 350}],
+      transactions: [],
       category: [],
     }
+    this.getTransactions = this.getTransactions.bind(this)
+    this.deleteTrans = this.deleteTrans.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
   }
+
+  componentDidMount() {
+    this.getTransactions()
+  }
+
+  getTransactions() {
+    axios.get('http://localhost:3000/spending/transactions/Other')
+      .then((response) => {
+        this.setState({transactions: response.data})
+      })
+      .catch((err) => {
+        console.log(err, 'unable to retrieve transaction list')
+      })
+  }
+
+  deleteTrans(id) {
+    this.deleteItem(id)
+    axios.delete(`http://localhost:3000/spending/transactions`, { params: id })
+    .then(() => {
+      console.log('transaction deleted')
+    })
+    .catch((err) => {
+      console.log(err, 'failed to delete')
+    })
+  }
+
+  deleteItem(id) {
+    this.setState({
+      transactions: this.state.transactions.filter(transaction => transaction.transaction_id !== id)
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -22,7 +58,7 @@ export default class Transactions extends React.Component {
               <Text style={styles.transaction}>{transaction.transaction_name}</Text>
               <Text style={styles.amount}>$ {transaction.amount}</Text>
               <TouchableOpacity style={styles.icon}>
-              <MaterialIcons name='close' size={28} onPress={this.deleteTrans} />
+              <MaterialIcons name='close' size={28} onPress={() => this.deleteTrans(transaction.transaction_id)} />
               </TouchableOpacity>
               </Card>
               </View>

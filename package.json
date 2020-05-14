@@ -5,14 +5,18 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "dev": "nodemon server/index.js"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
     "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "expo": "~37.0.3",
     "express": "^4.17.1",
     "nodemon": "^2.0.3",
+    "pg": "^8.0.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",

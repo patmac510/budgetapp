@@ -1,34 +1,62 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import FlatButton from '../shared/button';
+const axios = require('axios')
 
 
-export default function Home( {navigation} ) {
-
-  const addTrans = () => {
-    navigation.navigate('AddTransaction')
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: {},
+      categories: [],
+      transactions:[],
+    }
+    this.addTrans = this.addTrans.bind(this);
+    this.trans = this.trans.bind(this);
+    this.months = this.months.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
-  const trans = () => {
-    navigation.navigate('Transactions')
-  }
-  const months = () => {
-    navigation.navigate('Months')
+
+  componentDidMount() {
+    this.getProfile()
   }
 
+  getProfile() {
 
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.budget}>Current Budget: $3000</Text>
-        <Text style={styles.spending}>Total Spending: $550</Text>
+    axios.get('http://localhost:3000/spending/1', {params:{user_id: 1}})
+      .then((response) => {
+        this.setState({ profile: response.data[0] })
+      })
+      .catch((err) => {
+        console.log(err, 'cannot get profile information')
+      })
+  }
+
+  addTrans() {
+    this.props.navigation.navigate('AddTransaction')
+  }
+  trans () {
+    this.props.navigation.navigate('Transactions')
+  }
+  months () {
+    this.props.navigation.navigate('Months')
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.budget}>Current Budget: ${this.state.profile.budget}</Text>
+          <Text style={styles.spending}>Total Spending: ${this.state.profile.spending}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <FlatButton text='Add Transaction' onPress={this.addTrans} />
+          <FlatButton text='Transactions' onPress={this.trans} />
+          <FlatButton text='View Previous Months' onPress={this.months} />
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <FlatButton text='Add Transaction' onPress={addTrans} />
-        <FlatButton text='Transactions' onPress={trans} />
-        <FlatButton text='View Previous Months' onPress={months} />
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({

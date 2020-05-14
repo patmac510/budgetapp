@@ -5,6 +5,7 @@ const getSpendingByMonth = (req, res) => {
     if (err) {
       console.log(err, `cannot retrieve spending from user ${req.params.user_id}`);
     } else {
+      console.log(data.rows)
       res.status(200).send(data.rows);
     }
   });
@@ -33,7 +34,7 @@ const getTransactions = (req, res) => {
 const addTransaction = (req, res) => {
   const data = req.body;
   const params = [
-    data.item_name,
+    data.transaction_name,
     data.category_name,
     data.amount,
     data.transaction_date,
@@ -106,7 +107,7 @@ const updateCategory = (req, res) => {
 };
 
 const deleteTransaction = (req, res) => {
-  Models.deleteTransaction([req.params.transaction_id], err => {
+  Models.deleteTransaction([req.query['0']], err => {
     if (err) {
       console.log(err, `unable to delete ${req.params.transaction_id}`);
     } else {
